@@ -1,0 +1,83 @@
+﻿@model IEnumerable<T3_GRUPO_05.Models.Libro>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        background-image: linear-gradient(to bottom right, #FCCE32, #FF2B5B);
+        font-family: Roboto;
+    }
+
+
+    tbody tr {
+        background-color: white;
+    }
+
+    th, td {
+        border: none;
+        text-align: center;
+        padding: 8px;
+    }
+</style>
+
+<div class="container pt-3">
+
+    <h2 style="text-align:center;color:white; font-weight:900"> LISTA DE LIBROS</h2>
+
+    <div class="col-6">
+        <a asp-controller="Libro" asp-action="Crear" class="btn btn-primary" style="border:none;background-color:#4EBE3A;border-radius:30px; box-shadow: 4px 4px 10px 0px black;">Nuevo Libro</a>
+    </div>
+
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <table style="width:100%;  border: none;  border-radius:30px; overflow: hidden; box-shadow: 4px 4px 10px 0px black; ">
+            <thead style="text-align:center">
+                <tr style="background-color:#282321; color: white;vertical-align:middle">
+                    <th> TÍTULO </th>
+                    <th> AUTOR </th>
+                    <th> TEMA </th>
+                    <th> EDITORIAL </th>
+                    <th> AÑO DE PUBLICACIÓN </th>
+                    <th> PÁGINAS </th>
+                    <th> CATEGORÍA </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody style="color: #555555">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th width="23%" style="font-weight: 300;">@item.Titulo</th>
+                        <th width="10%" style="font-weight: 300;">@item.Autor</th>
+                        <th width="10%" style="font-weight: 300;">@item.Tema</th>
+                        <th width="10%" style="font-weight: 300;">@item.Editorial</th>
+                        <th width="10%" style="font-weight: 300;">@item.AnioPublicacion</th>
+                        <th width="10%" style="font-weight: 300;">@item.Paginas</th>
+                        <th width="10%" style="font-weight: 300;">@item.Categoria</th>
+                        <th width="17%" style="font-weight: 300;">
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="Libro" asp-action="Editar" asp-route-Id="@item.Id" class="btn btn-primary mx-2" style="border-radius:30px;">Editar</a>
+                                <a asp-controller="Libro" asp-action="Eliminar" asp-route-Id="@item.Id" class="btn btn-danger mx-2" style="border-radius:30px;">Borrar</a>
+                            </div>
+                        </th>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+
+        <p>No hay registros de Libros</p>
+    }
+
+</div>
+
+
+
